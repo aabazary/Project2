@@ -24,9 +24,10 @@ router.get('/', async (req, res) => {
     const games = gameData.map((project) => project.get({
       plain: true
     }));
-
+    
     res.render('homepage', {
-      games
+      games, 
+      loggedIn: req.session.loggedIn
     })
   } catch (err) {
     res.status(500).json(err);
