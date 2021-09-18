@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
             const posts = postData.map(post => post.get({
                 plain: true
             }));
-            res.render('dashboard', {
+            res.render('forum', {
                 posts,
                 loggedIn: true
             });
