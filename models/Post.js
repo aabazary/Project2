@@ -16,8 +16,11 @@ Post.init({
     title: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+            len: [2],
+        },
     },
-    contents: {
+    content: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -31,7 +34,6 @@ Post.init({
     },
 }, {
     sequelize,
-    timestamps: false,
     freezeTableName: true,
     underscored: true,
     modelName: 'post',

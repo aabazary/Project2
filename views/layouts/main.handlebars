@@ -4,34 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Blog</title>
-    <link rel="stylesheet" href="/css/jass.css">
+    <title>Gamers Unite</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
-    <header class="display-flex justify-space-between align-center p-2">
-        <h1>
-            Tech Blog
-        </h1>
-        {{#if logged_in}}
-        <nav>
-            <button class="btn" id="logout">Log Out</button>
+<body class="bg-gray-500">
+    <header class="bg-gray-900 px-5 py-5">
+        <h1 class="text-2xl font-bold text-white sm:text-3xl sm:truncate">Gamers Unite</h1>
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <nav class="bg-gray-800 mt-2">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <div class=" md:ml-6 md:flex md:items-center md:space-x-4">
+                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                            <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                            {{#if loggedIn}}
+
+                            <a href="/"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                id="logout">Log
+                                Out</a>
+                            {{else}}
+                            <a href="/login"
+                                class="tabs text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log
+                                In</a>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </nav>
-        {{else}}
-        <nav>
-            <button class="btn" id="logout">Log In</button>
-        </nav>
-        {{/if}}
-    </header>
-    <main class="container container-fluid mt-5">
+            </header>
+    <main class="container container-fluid mt-5 bg-gray-500 justify-center">
         {{{ body }}}
     </main>
     <footer>
 
     </footer>
 
-    {{#if logged_in}}
+    {{#if loggedIn}}
     <script src="/js/logout.js"></script>
+
+    {{else}}
+
     {{/if}}
 </body>
 
