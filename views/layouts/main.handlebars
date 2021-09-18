@@ -21,12 +21,16 @@
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                             <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
                             {{#if loggedIn}}
+                            <a href="/forum"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">forum</a>
 
-                            <a href="/"
+                            <a href="/forum"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 id="logout">Log
                                 Out</a>
                             {{else}}
+                            <a href="/login"
+                                class="tabs text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">forum</a>
                             <a href="/login"
                                 class="tabs text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Log
                                 In</a>
@@ -37,7 +41,7 @@
             </div>
 
         </nav>
-            </header>
+    </header>
     <main class="container container-fluid mt-5 bg-gray-500 justify-center">
         {{{ body }}}
     </main>
@@ -51,6 +55,7 @@
     {{else}}
 
     {{/if}}
+
 </body>
 
 </html>
