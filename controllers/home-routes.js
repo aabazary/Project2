@@ -2,14 +2,35 @@ const router = require('express').Router();
 const {
   User,
   Post,
-  Comment
+  Comment,
+  Game
 
 } = require('../models');
 const withAuth = require('../utils/auth');
 
 
 router.get('/', async (req, res) => {
-  res.render('homepage')
+  try {
+    const gameData = await Game.findAll({
+      attributes: [
+        'id',
+        'title',
+        'type',
+        'image'
+      ],
+      
+    });
+
+    const games = gameData.map((project) => project.get({
+      plain: true
+    }));
+
+    res.render('homepage', {
+      games
+    })
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 
