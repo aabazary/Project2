@@ -1,6 +1,7 @@
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
+const Game = require('./Games')
 
 User.hasMany(Post, {
     foreignKey: 'user_id',
@@ -35,5 +36,6 @@ Comment.belongsTo(Post, {
 module.exports = {
     User,
     Post,
-    Comment
+    Comment,
+    Game
 };
