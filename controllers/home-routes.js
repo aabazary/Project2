@@ -1,17 +1,33 @@
 const router = require('express').Router();
 const {
   User,
-  
+  Post,
+  Comment
+
 } = require('../models');
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 
 router.get('/', async (req, res) => {
-  const userData = await User.findAll().catch((err) => { 
-      res.json(err);
-    });
-      const users = userData.map((user) => user.get({ plain: true }));
-      res.render('homepage', { users });
-    });
+  res.render('homepage')
+});
+
+
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('signup');
+});
+
 
 module.exports = router;
