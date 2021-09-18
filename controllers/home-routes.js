@@ -24,9 +24,10 @@ router.get('/', async (req, res) => {
     const games = gameData.map((project) => project.get({
       plain: true
     }));
-
+    
     res.render('homepage', {
-      games
+      games, 
+      loggedIn: req.session.loggedIn
     })
   } catch (err) {
     res.status(500).json(err);
@@ -35,18 +36,18 @@ router.get('/', async (req, res) => {
 
 
 router.get('/login', (req, res) => {
-  // if (req.session.loggedIn) {
-  //   res.redirect('/');
-  //   return;
-  // }
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
   res.render('login');
 });
 
 router.get('/signup', (req, res) => {
-  // if (req.session.loggedIn) {
-  //   res.redirect('/');
-  //   return;
-  // }
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
   res.render('signup');
 });
 
