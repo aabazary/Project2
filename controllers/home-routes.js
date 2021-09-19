@@ -17,7 +17,11 @@ router.get('/', async (req, res) => {
         'title',
         'type',
         'image'
-      ],
+      ], 
+    //   include: [{
+    //     model: User,
+    //     attributes: ['username']
+    // }],
       
     });
 
@@ -27,6 +31,36 @@ router.get('/', async (req, res) => {
     
     res.render('homepage', {
       games, 
+      loggedIn: req.session.loggedIn
+    })
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.get('/', async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: [
+        'id',
+        'title',
+        'type',
+        'image'
+      ], 
+    //   include: [{
+    //     model: User,
+    //     attributes: ['username']
+    // }],
+      
+    });
+
+    const users = userData.map((project) => project.get({
+      plain: true
+    }));
+    
+    res.render('homepage', {
+      users, 
       loggedIn: req.session.loggedIn
     })
   } catch (err) {

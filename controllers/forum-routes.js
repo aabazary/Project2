@@ -11,7 +11,7 @@ const {
 
 router.get('/', async (req, res) => {
  
-            res.render('forum')
+            res.render('forum', {loggedIn: req.session.loggedIn})
 
 });
 
