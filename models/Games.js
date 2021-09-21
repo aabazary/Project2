@@ -20,6 +20,12 @@ Game.init({
             len: [2],
         },
     },
+    developer: {
+        type: DataTypes.STRING,
+    },
+    publisher: {
+        type: DataTypes.STRING,
+    },
     type: {
         type: DataTypes.STRING,
         allowNull: false
@@ -28,7 +34,18 @@ Game.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    
+    cost: {
+        type: DataTypes.STRING,
+    },
+    release: {
+        type: DataTypes.STRING,
+    },
+    url: {
+        type: DataTypes.STRING,
+    },
+    description: {
+        type: DataTypes.STRING,
+    },
     },
      {
     sequelize,

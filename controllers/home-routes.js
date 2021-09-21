@@ -12,12 +12,17 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     const gameData = await Game.findAll({
-      attributes: [
-        'id',
-        'title',
-        'type',
-        'image'
-      ], 
+      attributes: ['id',
+      'title',
+      'developer',
+      'publisher',
+      'type',
+      'image',
+      'cost',
+      'release',
+      'url',
+      'description'
+      ],
     //   include: [{
     //     model: User,
     //     attributes: ['username']
@@ -30,6 +35,7 @@ router.get('/', async (req, res) => {
     }));
     
     res.render('homepage', {
+    
       games, 
       loggedIn: req.session.loggedIn
     })
@@ -38,20 +44,44 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/games/:id', async (req, res) => {
+  try {
+    const gameData = await Game.findByPk(req.params.id, {
+      attributes: ['id',
+      'title',
+      'developer',
+      'publisher',
+      'type',
+      'image',
+      'cost',
+      'release',
+      'url',
+      'description'
+      ],
+
+    });
+
+    const games = gameData.get({
+      plain: true
+    });
+
+    res.render('games', {
+      games, loggedIn: req.session.loggedIn
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: [
         'id',
-        'title',
-        'type',
-        'image'
+        'username',
+        'avatar'
       ], 
-    //   include: [{
-    //     model: User,
-    //     attributes: ['username']
-    // }],
       
     });
 
