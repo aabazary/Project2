@@ -21,7 +21,7 @@ Post.init({
         },
     },
     content: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1234),
         allowNull: false
     },
     user_id: {
@@ -29,6 +29,14 @@ Post.init({
         allowNull: false,
         references: {
             model: 'user',
+            key: 'id'
+        },
+    },
+    game_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'game',
             key: 'id'
         },
     },

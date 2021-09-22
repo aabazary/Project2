@@ -3,6 +3,11 @@ const Post = require('./Post');
 const Comment = require('./Comment');
 const Game = require('./Games')
 
+Game.hasMany(Post, {
+    foreignKey: 'game_id',
+    onDelete: 'CASCADE'
+})
+
 User.hasMany(Post, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
@@ -15,6 +20,11 @@ User.hasMany(Comment, {
 
 Post.belongsTo(User, {
     foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+
+Post.belongsTo(Game, {
+    foreignKey: 'game_id',
     onDelete: 'CASCADE'
 });
 

@@ -8,6 +8,9 @@ const {
 } = require('../models');
 const withAuth = require('../utils/auth');
 
+router.get('/forum', async (req, res) => {
+  res.render('forum')
+})
 
 router.get('/', async (req, res) => {
   try {
