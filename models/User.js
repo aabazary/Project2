@@ -22,6 +22,9 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
+    avatar: {
+        type: DataTypes.STRING,
+    },
     // email: {
     //     type: DataTypes.STRING,
     //     allowNull: false,

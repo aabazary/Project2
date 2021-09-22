@@ -9,17 +9,24 @@ const {
 const withAuth = require('../utils/auth');
 
 router.get('/forum', async (req, res) => {
-  res.render('forum')
+  res.render('forum', {
+    loggedIn: req.session.loggedIn
+  })
 })
 
 router.get('/', async (req, res) => {
   try {
     const gameData = await Game.findAll({
-      attributes: [
-        'id',
-        'title',
-        'type',
-        'image'
+      attributes: ['id',
+      'title',
+      'developer',
+      'publisher',
+      'type',
+      'image',
+      'cost',
+      'release',
+      'url',
+      'description'
       ],
       
     });
@@ -27,9 +34,66 @@ router.get('/', async (req, res) => {
     const games = gameData.map((project) => project.get({
       plain: true
     }));
-
+    
     res.render('homepage', {
-      games
+    
+      games, 
+      loggedIn: req.session.loggedIn
+    })
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/games/:id', async (req, res) => {
+  try {
+    const gameData = await Game.findByPk(req.params.id, {
+      attributes: ['id',
+      'title',
+      'developer',
+      'publisher',
+      'type',
+      'image',
+      'cost',
+      'release',
+      'url',
+      'description'
+      ],
+
+    });
+
+    const games = gameData.get({
+      plain: true
+    });
+
+    res.render('games', {
+      games, loggedIn: req.session.loggedIn
+    });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/', async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: [
+        'id',
+        'username',
+        'avatar'
+      ], 
+      
+    });
+
+    const users = userData.map((project) => project.get({
+      plain: true
+    }));
+    
+    res.render('homepage', {
+      games: games,
+      users: users, 
+      loggedIn: req.session.loggedIn
     })
   } catch (err) {
     res.status(500).json(err);

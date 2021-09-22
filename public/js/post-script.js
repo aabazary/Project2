@@ -1,9 +1,15 @@
 const button_AddComment = document.getElementById('add-post')
 const button_SubmitComment = document.getElementById('submit-button')
 const button_CancelComment = document.getElementById('cancel-button')
-const button_editComment = document.getElementById('cancel-button')
-const button_deleteComment = document.getElementById('cancel-button')
+const image_editComment = document.getElementById('cancel-post')
+const image_deleteComment = document.getElementById('delete-post')
 
+
+image_editComment.addEventListener('click', function () {
+    event.preventDefault();
+    
+
+})
 
 button_AddComment.addEventListener('click', function () {
     // Open Form
@@ -52,4 +58,6 @@ button_CancelComment.addEventListener('click', function () {
     const form = document.getElementById('form')
     form.setAttribute('style', 'display: none;')
 })
+
+
 

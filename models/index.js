@@ -4,8 +4,8 @@ const Comment = require('./Comment');
 const Game = require('./Games')
 
 Game.hasMany(Post, {
-    foreignKey: 'game_id',
-    onDelete: 'CASCADE'
+    foreignKey: 'game_id' /*,
+    onDelete: 'CASCADE' */
 })
 
 User.hasMany(Post, {
@@ -24,8 +24,8 @@ Post.belongsTo(User, {
 });
 
 Post.belongsTo(Game, {
-    foreignKey: 'game_id',
-    onDelete: 'CASCADE'
+    foreignKey: 'game_id' /*,
+    onDelete: 'CASCADE' */
 });
 
 Post.hasMany(Comment, {

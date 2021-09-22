@@ -54,7 +54,7 @@ router.get('/:id', /* enable later withAuth, */ async (req, res) => {
 
         res.render('forum-landing-page-main', {
             posts,
-            // loggedIn: req.session.loggedIn
+            loggedIn: req.session.loggedIn
         });
     } catch (err) {
         console.log(err);
@@ -89,8 +89,8 @@ router.get('/post/:id', /* enable later withAuth, */ async (req, res) => {
 
 
         res.render('post-page', {
-            posts
-            // loggedIn: req.session.loggedIn
+            posts,
+            loggedIn: req.session.loggedIn
         });
     } catch (err) {
         console.log(err);
