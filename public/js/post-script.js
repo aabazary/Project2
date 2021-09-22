@@ -5,11 +5,11 @@ const image_editComment = document.getElementById('cancel-post')
 const image_deleteComment = document.getElementById('delete-post')
 
 
-image_editComment.addEventListener('click', function () {
-    event.preventDefault();
+// image_editComment.addEventListener('click', function () {
+//     event.preventDefault();
     
 
-})
+// })
 
 button_AddComment.addEventListener('click', function () {
     // Open Form
