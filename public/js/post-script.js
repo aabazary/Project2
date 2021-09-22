@@ -8,9 +8,12 @@ const image_deleteComment = document.getElementById('delete-post')
 // image_editComment.addEventListener('click', function () {
 //     event.preventDefault();
     
+    
 
 // })
 
+
+// If someone clicks Add Comment Button, open the form module
 button_AddComment.addEventListener('click', function () {
     // Open Form
     const form = document.getElementById('form')
@@ -18,6 +21,8 @@ button_AddComment.addEventListener('click', function () {
 
 })
 
+
+// If someone clicks submit button on the form module, post comment to database
 button_SubmitComment.addEventListener('click', function () {
     var pathStr = document.location.pathname.replace(/#/g, '')
     // Fix logic for postID if adding more than 9 posts
@@ -28,7 +33,7 @@ button_SubmitComment.addEventListener('click', function () {
     console.log(comment)
 
     // Post Comment
-    fetch('/comment', {
+    fetch('/api/comment', {
         method: "POST",
         body: JSON.stringify({body: comment, id: postID}),
         headers: { 'Content-Type': 'application/json' }
@@ -52,6 +57,7 @@ button_SubmitComment.addEventListener('click', function () {
         })
 })
 
+// If someone clicks cancel on the form module, close form
 button_CancelComment.addEventListener('click', function () {
 
     // Close Form

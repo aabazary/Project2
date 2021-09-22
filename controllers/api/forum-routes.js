@@ -4,7 +4,7 @@ const { User, Comment, Post } = require('../../models');
 
 
 
-// Post Comment
+// Post a new post
 router.post('/new', async (req, res) => {
 
     console.log('trying to create new post')

@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
             body: req.body.body,
             post_id: req.body.id,
             user_id: (req.session) ? req.session.user_id : 1,
-            // user_id: req.session.user_id,
+            user_id: req.session.user_id,
         }).then(newComment) 
         console.log(newComment)
         console.log('Comment Created')
