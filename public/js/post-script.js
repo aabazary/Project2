@@ -5,11 +5,7 @@ const image_editComment = document.getElementById('cancel-post')
 const image_deleteComment = document.getElementById('delete-post')
 
 
-// image_editComment.addEventListener('click', function () {
-    
-    
 
-// })
 
 
 // If someone clicks Add Comment Button, open the form module
@@ -62,6 +58,27 @@ button_CancelComment.addEventListener('click', function () {
     // Close Form
     const form = document.getElementById('form')
     form.setAttribute('style', 'display: none;')
+})
+
+image_deleteComment.addEventListener('click', function (e) {
+    console.log('Deleting this comment')
+    const commentLocation1 = this.parentElement
+    const commentLocation2 = commentLocation1.parentElement.querySelector('p').innerText
+    console.log(commentLocation1)
+    console.log(commentLocation2)
+    console.log(this)
+    console.log(e)
+    
+    fetch('/api/comment/delete', {
+        method: "DELETE",
+        body: JSON.stringify({ id: parseInt(this.getAttribute("data-id")), body: commentLocation2 }),
+        headers: { 'Content-Type': 'application/json' }
+
+    })
+        // Delay refresh to make sure data is in db (does not happen instantly)
+        setTimeout(() => {
+            location.reload()
+        }, 500);
 })
 
 

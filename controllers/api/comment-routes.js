@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Comment, Blog } = require('../../models');
+const { User, Comment, Post } = require('../../models');
 
 // Create new Comment
 router.post('/', async (req, res) => {
@@ -7,25 +7,37 @@ router.post('/', async (req, res) => {
     console.log(JSON.stringify(req.body))
 
 
-    try {
+    // try {
         const newComment = await Comment.create({
             body: req.body.body,
             post_id: req.body.id,
-            user_id: (req.session) ? req.session.user_id : 1,
             user_id: req.session.user_id,
-        }).then(newComment) 
+        }).then( (newComment) => {
         console.log(newComment)
         console.log('Comment Created')
         res.render('post-comment-section', {
             newComment
         });
         console.log("is this working?")
-    } catch (err) {
+    }).catch ( (err) => {
         res.status(500).json(err);
-    }
+    })
 })
 
-// Edit comment
+// Delete comment
+router.delete('/delete', async (req, res) => {
+    console.log('comment is deleted')
+    // try {
+    const deletedComment = await Comment.destroy({
+        where: {
+            id: req.body.id
+        }
+    }).then((deletedComment) => {
+        console.log('Deleted the comment ' + deletedComment)
+    }).catch((err) => {
+        res.status(500).json(err)
+    });
+})
 
 
 module.exports = router;

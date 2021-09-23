@@ -77,6 +77,7 @@ router.get('/post/:id', /* enable later withAuth, */ async (req, res) => {
                     {
                         model: Comment,
                         attributes: [
+                            'id',
                             'body'
                         ]
                     }
