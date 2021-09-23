@@ -9,34 +9,9 @@ const {
 const withAuth = require('../utils/auth');
 
 router.get('/forum', async (req, res) => {
-  try {
-    const gameData = await Game.findAll({
-      attributes: ['id',
-      'title',
-      'developer',
-      'publisher',
-      'type',
-      'image',
-      'cost',
-      'release',
-      'url',
-      'description'
-      ],
-      
-    });
-
-    const games = gameData.map((project) => project.get({
-      plain: true
-    }));
-    
-    res.render('forum', {
-    
-      games, 
-      loggedIn: req.session.loggedIn
-    })
-  } catch (err) {
-    res.status(500).json(err);
-  }
+  res.render('forum', {
+    loggedIn: req.session.loggedIn
+  })
 })
 
 router.get('/', async (req, res) => {
@@ -54,7 +29,7 @@ router.get('/', async (req, res) => {
       'description'
       ],
       
-});
+    });
 
     const games = gameData.map((project) => project.get({
       plain: true
