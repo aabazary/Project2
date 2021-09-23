@@ -39,5 +39,9 @@ router.delete('/delete', async (req, res) => {
     });
 })
 
+router.put('/edit', async (req, res) => {
+    console.log('editing')
+})
+
 
 module.exports = router;

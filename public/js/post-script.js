@@ -1,12 +1,8 @@
 const button_AddComment = document.getElementById('add-post')
 const button_SubmitComment = document.getElementById('submit-button')
 const button_CancelComment = document.getElementById('cancel-button')
-const image_editComment = document.getElementById('cancel-post')
-const image_deleteComment = document.getElementById('delete-post')
-
-
-
-
+const allImages_editComment = document.querySelectorAll('[data-edit]')
+const allImages_deleteComment = document.querySelectorAll('[data-delete]')
 
 // If someone clicks Add Comment Button, open the form module
 button_AddComment.addEventListener('click', function () {
@@ -21,8 +17,8 @@ button_AddComment.addEventListener('click', function () {
 button_SubmitComment.addEventListener('click', function () {
     var pathStr = document.location.pathname.replace(/#/g, '')
     // Fix logic for postID if adding more than 9 posts
-    var postID = parseInt(pathStr.charAt(pathStr.length-1))
-    
+    var postID = parseInt(pathStr.charAt(pathStr.length - 1))
+
     const comment = document.getElementById('about').value
     console.log('phase 1')
     console.log(comment)
@@ -30,7 +26,7 @@ button_SubmitComment.addEventListener('click', function () {
     // Post Comment
     fetch('/api/comment', {
         method: "POST",
-        body: JSON.stringify({body: comment, id: postID}),
+        body: JSON.stringify({ body: comment, id: postID }),
         headers: { 'Content-Type': 'application/json' }
 
     })
@@ -47,12 +43,12 @@ button_SubmitComment.addEventListener('click', function () {
                 }, 500);
 
             } else {
-            alert('Comment not submitted')
-        }
+                alert('Comment not submitted')
+            }
         })
 })
 
-// If someone clicks cancel on the form module, close form
+// If someone clicks cancel on the form modal, close form
 button_CancelComment.addEventListener('click', function () {
 
     // Close Form
@@ -60,25 +56,33 @@ button_CancelComment.addEventListener('click', function () {
     form.setAttribute('style', 'display: none;')
 })
 
-image_deleteComment.addEventListener('click', function (e) {
-    console.log('Deleting this comment')
-    const commentLocation1 = this.parentElement
-    const commentLocation2 = commentLocation1.parentElement.querySelector('p').innerText
-    console.log(commentLocation1)
-    console.log(commentLocation2)
-    console.log(this)
-    console.log(e)
-    
-    fetch('/api/comment/delete', {
-        method: "DELETE",
-        body: JSON.stringify({ id: parseInt(this.getAttribute("data-id")), body: commentLocation2 }),
-        headers: { 'Content-Type': 'application/json' }
 
-    })
+// // EDIT COMMENT — for future development (:
+// allImages_editComment.forEach(item => {
+//     item.addEventListener('click', event => {
+//         // Append 
+
+//         // Open Edit Form modal
+//         const form = document.getElementById('form-edit').
+//         form.setAttribute('style', 'display: show;')
+//     })
+// })
+
+// Delete Comment
+allImages_deleteComment.forEach(item => {
+    item.addEventListener('click', function (e) {
+
+        fetch('/api/comment/delete', {
+            method: "DELETE",
+            body: JSON.stringify({ id: parseInt(this.getAttribute("data-id")) }),
+            headers: { 'Content-Type': 'application/json' }
+
+        })
         // Delay refresh to make sure data is in db (does not happen instantly)
         setTimeout(() => {
             location.reload()
         }, 500);
+    })
 })
 
 
