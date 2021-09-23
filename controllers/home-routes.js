@@ -8,7 +8,8 @@ const {
 } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/forum', async (req, res) => {
+//route for the forum page
+router.get('/forum',withAuth, async (req, res) => {
   try {
     const gameData = await Game.findAll({
       attributes: ['id',
@@ -39,6 +40,7 @@ router.get('/forum', async (req, res) => {
   }
 })
 
+//route for home page
 router.get('/', async (req, res) => {
   try {
     const gameData = await Game.findAll({
@@ -70,6 +72,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+//route for individual game
 router.get('/games/:id', async (req, res) => {
   try {
     const gameData = await Game.findByPk(req.params.id, {
@@ -100,6 +103,7 @@ router.get('/games/:id', async (req, res) => {
   }
 });
 
+//attempting to import users, include is giving errors
 router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
@@ -125,7 +129,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-
+//login page route
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
@@ -134,6 +138,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+//signup page route
 router.get('/signup', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');

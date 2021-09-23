@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { User, Comment, Post } = require('../../models');
-
+const withAuth = require('../../utils/auth');
 
 
 
 // Post Comment
-router.post('/new', async (req, res) => {
+router.post('/new', withAuth, async (req, res) => {
 
     console.log('trying to create new post')
     console.log(JSON.stringify(req.body))
@@ -31,7 +31,7 @@ router.post('/new', async (req, res) => {
 
 
 // GET all posts per game
-router.get('/:id', /* enable later withAuth, */ async (req, res) => {
+router.get('/:id', withAuth,  async (req, res) => {
     console.log(JSON.stringify(req.params))
     try {
 
@@ -79,7 +79,7 @@ router.get('/:id', /* enable later withAuth, */ async (req, res) => {
 
 
 // GET all comments per post
-router.get('/post/:id', /* enable later withAuth, */ async (req, res) => {
+router.get('/post/:id', withAuth, async (req, res) => {
     console.log(JSON.stringify(req.params))
     try {
 
