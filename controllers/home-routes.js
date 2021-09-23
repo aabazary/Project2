@@ -9,9 +9,34 @@ const {
 const withAuth = require('../utils/auth');
 
 router.get('/forum', async (req, res) => {
-  res.render('forum', {
-    loggedIn: req.session.loggedIn
-  })
+  try {
+    const gameData = await Game.findAll({
+      attributes: ['id',
+      'title',
+      'developer',
+      'publisher',
+      'type',
+      'image',
+      'cost',
+      'release',
+      'url',
+      'description'
+      ],
+      
+    });
+
+    const games = gameData.map((project) => project.get({
+      plain: true
+    }));
+    
+    res.render('forum', {
+    
+      games, 
+      loggedIn: req.session.loggedIn
+    })
+  } catch (err) {
+    res.status(500).json(err);
+  }
 })
 
 router.get('/', async (req, res) => {

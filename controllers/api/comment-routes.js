@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Comment, Post } = require('../../models');
+const { Game, User, Comment, Post } = require('../../models');
 
 // Create new Comment
 router.post('/', async (req, res) => {

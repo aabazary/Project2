@@ -4,7 +4,7 @@ const { User, Comment, Post } = require('../../models');
 
 
 
-// Post a new post
+// Post Comment
 router.post('/new', async (req, res) => {
 
     console.log('trying to create new post')
@@ -40,7 +40,22 @@ router.get('/:id', /* enable later withAuth, */ async (req, res) => {
             {
                 where: {
                     game_id: req.params.id
-                }
+                },
+                include: [
+                    {
+                        model: Comment,
+                        attributes: [
+                            'body'
+                        ]
+                    },
+                    {
+                        model: User,
+                        attributes: [
+                            'id',
+                            'username',
+
+                        ]
+                    }]
             },
         );
         const posts = postData.map((postInfo) =>
@@ -53,7 +68,7 @@ router.get('/:id', /* enable later withAuth, */ async (req, res) => {
 
 
         res.render('forum-landing-page-main', {
-            posts,
+            posts: posts,
             loggedIn: req.session.loggedIn
         });
     } catch (err) {
@@ -80,7 +95,16 @@ router.get('/post/:id', /* enable later withAuth, */ async (req, res) => {
                             'id',
                             'body'
                         ]
-                    }
+                    },
+                    {
+                        model: User,
+                        attributes: [
+                            'id',
+                            'username',
+
+                        ]
+                    },
+                    
                 ]
             }
         );
@@ -90,7 +114,7 @@ router.get('/post/:id', /* enable later withAuth, */ async (req, res) => {
 
 
         res.render('post-page', {
-            posts,
+            posts: posts,
             loggedIn: req.session.loggedIn
         });
     } catch (err) {
