@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {
+    Game,
     User,
     Post,
     Comment
