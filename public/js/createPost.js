@@ -2,6 +2,12 @@ const button_CreatePost = document.getElementById('create-post')
 const button_SubmitComment = document.getElementById('submit-button')
 const button_CancelComment = document.getElementById('cancel-button')
 
+button_CreatePost.addEventListener('click', function () {
+    // Open Form
+    const form = document.getElementById('form')
+    form.setAttribute('style', 'display: show;')
+})
+
 button_SubmitComment.addEventListener('click', function () {
     var pathStr = document.location.pathname.replace(/#/g, '')
     // Fix logic for gameID if adding more than 9 games

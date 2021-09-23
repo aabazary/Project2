@@ -3,7 +3,7 @@ const { Post } = require('../models');
 const samplePosts = [
     {
         id: 1,
-        title: 'How the do I counter Vulcan?!',
+        title: 'How do I counter Vulcan?!',
         content: 'I get wrecked by him every time I play against him in mid. His turret alone just bullies me. Idk what to do',
         user_id: 1,
         game_id: 1,
@@ -12,14 +12,14 @@ const samplePosts = [
         id: 2,
         title: 'Whats Your Favorite In Game Title?',
         content: 'I personally love my Forge Breaker one because its only earned by beating a Titan Forge Employee / Hi Rez. I really had an awesome experience getting that title and thats why I will never change it. What is your favorite Title you have and why?',
-        user_id: 1,
+        user_id: 2,
         game_id: 1
     },
     {
         id: 3,
         title: 'New player needs help on how to proceed?',
         content: 'I have been playing Arena for about 2 weeks and am not sure how to take the first step into Conquest. I am level 17 but its almost all Neith. I have watched some videos on the different positions but the couple games I tried I was no help to my team. Where do I start? Thank you for any info or ideas',
-        user_id: 1,
+        user_id: 3,
         game_id:1
     },
     {
@@ -33,7 +33,7 @@ const samplePosts = [
         id: 5,
         title: 'With which class are you going to start the game?',
         content: 'I know that most people want to play sorc, but curious to see if people will be interested in other characters too at the beginning :)',
-        user_id: 1,
+        user_id: 2,
         game_id: 3
     },
     {
