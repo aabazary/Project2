@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
       'description'
       ],
       
-    });
+});
 
     const games = gameData.map((project) => project.get({
       plain: true
