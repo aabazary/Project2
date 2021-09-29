@@ -1,6 +1,8 @@
 const button_AddComment = document.getElementById('add-post')
 const button_SubmitComment = document.getElementById('submit-button')
 const button_CancelComment = document.getElementById('cancel-button')
+const button_CancelEdit = document.getElementById('cancel-button2')
+const button_SaveEdit = document.getElementById('save-button')
 const allImages_editComment = document.querySelectorAll('[data-edit]')
 const allImages_deleteComment = document.querySelectorAll('[data-delete]')
 
@@ -58,15 +60,56 @@ button_CancelComment.addEventListener('click', function () {
 
 
 // // EDIT COMMENT — for future development (:
-// allImages_editComment.forEach(item => {
-//     item.addEventListener('click', event => {
-//         // Append 
 
-//         // Open Edit Form modal
-//         const form = document.getElementById('form-edit').
-//         form.setAttribute('style', 'display: show;')
-//     })
-// })
+// Open edit comment form:
+allImages_editComment.forEach(item => {
+    item.addEventListener('click', event => {
+        commentID = item.getAttribute('data-id')
+        // Append text from comment to form
+        document.getElementById('existing-text').value = item.parentElement.parentElement.querySelector('p').innerHTML
+        // Pass current Comment ID to textarea
+        document.getElementById('existing-text').setAttribute('data-id', commentID)
+        // Open Edit Form modal
+        const form = document.getElementById('edit-form')
+        form.setAttribute('style', 'display: show;')
+
+    })
+})
+
+// If someone clicks submit on the forum, save to database and update on-page comment
+button_SaveEdit.addEventListener('click', function (edit) {
+    var savedComment = document.getElementById('existing-text').value
+    var savedCommentID = document.getElementById('existing-text').getAttribute('data-id')
+    console.log(savedComment)
+    console.log(savedCommentID)
+    console.log('this')
+    console.log(document.getElementById(savedCommentID).innerText)
+
+    // Update on-page comment
+    document.getElementById(savedCommentID).innerHTML = savedComment
+
+    // Send to server
+    fetch('/api/comment/edit', {
+        method: "PUT",
+        body: JSON.stringify({ id: parseInt(savedCommentID), body: savedComment }),
+        headers: { 'Content-Type': 'application/json' }
+
+    })
+        
+    // Close Form
+    const form = document.getElementById('edit-form')
+    form.setAttribute('style', 'display: none;')
+
+
+})
+
+// If someone clicks cancel on the form modal, close form
+button_CancelEdit.addEventListener('click', function () {
+
+    // Close Form
+    const form = document.getElementById('edit-form')
+    form.setAttribute('style', 'display: none;')
+})
 
 // Delete Comment
 allImages_deleteComment.forEach(item => {

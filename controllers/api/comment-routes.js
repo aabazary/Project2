@@ -8,20 +8,43 @@ router.post('/', async (req, res) => {
 
 
     // try {
-        const newComment = await Comment.create({
-            body: req.body.body,
-            post_id: req.body.id,
-            user_id: req.session.user_id,
-        }).then( (newComment) => {
+    const newComment = await Comment.create({
+        body: req.body.body,
+        post_id: req.body.id,
+        user_id: req.session.user_id,
+    }).then((newComment) => {
         console.log(newComment)
         console.log('Comment Created')
         res.render('post-comment-section', {
             newComment
         });
         console.log("is this working?")
-    }).catch ( (err) => {
+    }).catch((err) => {
         res.status(500).json(err);
     })
+})
+
+// Edit comment
+router.put('/edit', async (req, res) => {
+    console.log('enter edit comment')
+    console.log(req.body.body)
+    console.log(req.body.id)
+
+    const editComment = await Comment.update(
+        {
+            body: req.body.body
+
+        },
+        {
+            where: {
+                id: req.body.id
+            }
+        })
+        .then((savedComment) => {
+            console.log('dudditz bitch')
+            console.log(savedComment)
+            })
+        .catch((err) => res.json(err));
 })
 
 // Delete comment
